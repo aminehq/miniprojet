@@ -1,3 +1,6 @@
-export default function total(state){
-    return state.price.reduce((acc,el)=>acc+el.price,0)
+export function selectTotal(cart) {
+  return cart.items.reduce(
+    (acc, item) => acc + item.price * item.quantite,
+    0
+  );
 }
