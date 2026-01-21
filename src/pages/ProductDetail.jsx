@@ -6,7 +6,7 @@ import { addToCart } from "../redux/cart/actions";
 function ProductDetail() {
     const { id } = useParams();
     const products = useSelector((state) => allProduits(state.products));
-    const product = products.find((p) => p.id === parseInt(id));
+    const product = products.find((p) => p.id === id);
     const dispatch = useDispatch();
 
     if (!product) {
