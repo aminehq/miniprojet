@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function NavBar() {
@@ -6,6 +6,7 @@ function NavBar() {
     const cartCount = cart.reduce((acc, item) => acc + item.quantite, 0);
 
     return (
+        <>
         <nav>
             <div className="logo">
                 <Link to="/">My Shop</Link>
@@ -19,6 +20,8 @@ function NavBar() {
                 </li>
             </ul>
         </nav>
+        <Outlet />
+        </>
     );
 }
 
