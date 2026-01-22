@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { allProduits } from "../redux/products/selectors";
-import { addToCart } from "../redux/cart/actions";
+import { allProduits } from "../redux/products/slices/productslice";
+import { addToCart } from "../redux/cart/slices/cartslice";
 
 function Products() {
-    const products = useSelector((state) => allProduits(state.products));
+    const products = useSelector(allProduits);
     const dispatch = useDispatch();
 
     return (
