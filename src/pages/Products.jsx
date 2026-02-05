@@ -1,14 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { allProduits, findProduitParcategory } from "../redux/products/slices/productslice";
+import {allProduits,findProduitParcategory} from "../redux/products/selectors"
 import { addToCart } from "../redux/cart/slices/cartslice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchproducts } from "../redux/products/asyncactions";
 
 function Products() {
 
     const dispatch = useDispatch();
-
-    
+    useEffect(()=>{
+        dispatch(fetchproducts())
+    },[dispatch])
     const [categorie, setCategorie] = useState(null);
 
     const products = useSelector(allProduits);
@@ -16,18 +18,24 @@ function Products() {
     const filtredproducts = useSelector(state =>
         categorie ? findProduitParcategory(state, categorie) : products
     );
-
     const handleChange = (e) => {
         setCategorie(e.target.value);
     };
-
+    const error = useSelector(state=>state.products.error)
+    if(filtredproducts.length===0){
+        return(<h1>dataloading...</h1>)
+    }
+    if(error){
+        return(<p>error: {error}</p>)
+    }
     return (
         <div className="container">
             <select onChange={handleChange}>
                 <option value="">All</option>
-                <option value="electronics">electronics</option>
+                <option value="furniture">furniture</option>
                 <option value="fragrances">fragrances</option>
                 <option value="beauty">beauty</option>
+                <option value="groceries">groceries</option>
             </select>
 
             <h1>Tous Les Produits</h1>
