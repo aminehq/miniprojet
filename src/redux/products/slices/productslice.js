@@ -116,7 +116,7 @@ const productSlice = createSlice({
     findProduitParId: (state, id) =>
       state.find((el) => el.id == id),
     findProduitParcategory: (state, category) =>
-      state.filter((el) => el.category === category),
+      state.filter((el) => el.category == category),
   },
 });
 
